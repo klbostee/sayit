@@ -12,5 +12,5 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # local network segment.
 ttl = struct.pack('b', 1)
 sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, ttl)
-sent = sock.sendto(sys.argv[1], multicast_group)
+sent = sock.sendto(" ".join(sys.argv[1:]), multicast_group)
 sock.close()
