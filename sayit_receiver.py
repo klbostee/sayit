@@ -2,7 +2,6 @@ import sys
 import os
 import socket
 import struct
-import StringIO
 
 
 class Worker(object):
@@ -22,7 +21,9 @@ class Worker(object):
     def run(self):
         while True:
             message, address = self.notificationSock.recvfrom(1024)
-            os.system("say {0}".format(message))
+            escaped = " ".join('"{0}"'.format(s.replace('"', '\\"')) for s in message.split(" "))
+            print "say", escaped
+            os.system("say {0}".format(escaped))
 
 
 Worker().run()
